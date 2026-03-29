@@ -2,8 +2,8 @@
 , lib ? import <nixpkgs/lib>
 }:
 pkgs.rustPlatform.buildRustPackage {
-  pname = "nix-editor";
-  version = "0.3.0";
+  pname = "nix-editor-fresh";
+  version = "0.4.0";
 
   src = [ ./. ];
 

@@ -14,17 +14,17 @@ A command line utility for modifying NixOS configuration values.
 ## Installation
 ### nix-env
 ```
-git clone https://github.com/snowfallorg/nix-editor
-nix-env -f nix-editor -i nix-editor
+git clone https://github.com/gschurck/nix-editor-fresh
+nix-env -f nix-editor-fresh -i nix-editor-fresh
 ```
 ### nix profile
 ```
-nix profile install github:snowfallorg/nix-editor
+nix profile install github:gschurck/nix-editor-fresh
 ```
 
 ### Run with Nix Flakes
 ```
-nix run github:snowfallorg/nix-editor -- --help
+nix run github:gschurck/nix-editor-fresh -- --help
 ```
 
 ### Usage:
@@ -46,10 +46,10 @@ Options:
   -h, --help             Print help
   -V, --version          Print version
 ```
-[coveralls badge]: https://img.shields.io/coveralls/github/vlinkz/nix-editor?style=for-the-badge
-[coveralls]: https://coveralls.io/github/vlinkz/nix-editor
-[crates badge]: https://img.shields.io/crates/v/nix-editor.svg?style=for-the-badge
-[crate]: https://crates.io/crates/nix-editor
+[coveralls badge]: https://img.shields.io/coveralls/github/gschurck/nix-editor-fresh?style=for-the-badge
+[coveralls]: https://coveralls.io/github/gschurck/nix-editor-fresh
+[crates badge]: https://img.shields.io/crates/v/nix-editor-fresh.svg?style=for-the-badge
+[crate]: https://crates.io/crates/nix-editor-fresh
 [builtwithnix badge]: https://img.shields.io/badge/Built%20With-Nix-41439A?style=for-the-badge&logo=nixos&logoColor=white
 [builtwithnix]: https://builtwithnix.org/
 [MIT badge]: https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge

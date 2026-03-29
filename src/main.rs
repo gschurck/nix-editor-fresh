@@ -1,5 +1,5 @@
 use clap::{self, ArgGroup, Parser};
-use nix_editor::{write::addtoarr, write::deref, write::write};
+use nix_editor_fresh::{write::addtoarr, write::deref, write::write};
 use owo_colors::*;
 use std::{fs, io::Write};
 
@@ -54,21 +54,21 @@ fn writetofile(file: &str, out: &str, format: bool) {
     }
 }
 
-fn printread(f: &str, attr: &str) -> Result<String, nix_editor::read::ReadError> {
-    nix_editor::read::readvalue(f, attr)
+fn printread(f: &str, attr: &str) -> Result<String, nix_editor_fresh::read::ReadError> {
+    nix_editor_fresh::read::readvalue(f, attr)
 }
 
-fn writeerr(e: nix_editor::write::WriteError, file: &str, attr: &str) {
+fn writeerr(e: nix_editor_fresh::write::WriteError, file: &str, attr: &str) {
     let msg;
     match e {
-        nix_editor::write::WriteError::ParseError => {
+        nix_editor_fresh::write::WriteError::ParseError => {
             msg = format!(
                 "failed to parse '{}' as a nix configuration file",
                 file.purple()
             );
             printerror(&msg);
         }
-        nix_editor::write::WriteError::NoAttr => {
+        nix_editor_fresh::write::WriteError::NoAttr => {
             msg = format!(
                 "cannot modify '{}' : {}",
                 attr.purple(),
@@ -76,7 +76,7 @@ fn writeerr(e: nix_editor::write::WriteError, file: &str, attr: &str) {
             );
             printerror(&msg);
         }
-        nix_editor::write::WriteError::ArrayError => {
+        nix_editor_fresh::write::WriteError::ArrayError => {
             msg = format!(
                 "cannot add an element to '{}' : {}",
                 attr.purple(),
@@ -84,7 +84,7 @@ fn writeerr(e: nix_editor::write::WriteError, file: &str, attr: &str) {
             );
             printerror(&msg);
         }
-        nix_editor::write::WriteError::WriteValueToSet => {
+        nix_editor_fresh::write::WriteError::WriteValueToSet => {
             msg = format!(
                 "cannot modify '{}' : {}",
                 attr.purple(),
@@ -95,17 +95,17 @@ fn writeerr(e: nix_editor::write::WriteError, file: &str, attr: &str) {
     }
 }
 
-fn readerr(e: nix_editor::read::ReadError, file: &str, attr: &str) {
+fn readerr(e: nix_editor_fresh::read::ReadError, file: &str, attr: &str) {
     let msg;
     match e {
-        nix_editor::read::ReadError::ParseError => {
+        nix_editor_fresh::read::ReadError::ParseError => {
             msg = format!(
                 "failed to parse '{}' as a nix configuration file",
                 file.purple()
             );
             printerror(&msg);
         }
-        nix_editor::read::ReadError::NoAttr => {
+        nix_editor_fresh::read::ReadError::NoAttr => {
             msg = format!(
                 "cannot read attribute '{}' in '{}' : {}",
                 attr.purple(),
@@ -114,7 +114,7 @@ fn readerr(e: nix_editor::read::ReadError, file: &str, attr: &str) {
             );
             printerror(&msg);
         }
-        nix_editor::read::ReadError::ArrayError => {
+        nix_editor_fresh::read::ReadError::ArrayError => {
             msg = format!(
                 "cannot read array '{}' : {}",
                 attr.purple(),
