@@ -43,7 +43,7 @@ struct Args {
     format: bool,
 }
 
-fn writetofile(file: &str, out: &str, format: bool) {
+pub fn writetofile(file: &str, out: &str, format: bool) {
     let mut outfile = std::fs::File::create(file).expect("create failed");
     if format {
         outfile
@@ -54,11 +54,11 @@ fn writetofile(file: &str, out: &str, format: bool) {
     }
 }
 
-fn printread(f: &str, attr: &str) -> Result<String, nix_editor_fresh::read::ReadError> {
+pub fn printread(f: &str, attr: &str) -> Result<String, nix_editor_fresh::read::ReadError> {
     nix_editor_fresh::read::readvalue(f, attr)
 }
 
-fn writeerr(e: nix_editor_fresh::write::WriteError, file: &str, attr: &str) {
+pub fn writeerr(e: nix_editor_fresh::write::WriteError, file: &str, attr: &str) {
     let msg;
     match e {
         nix_editor_fresh::write::WriteError::ParseError => {
@@ -95,7 +95,7 @@ fn writeerr(e: nix_editor_fresh::write::WriteError, file: &str, attr: &str) {
     }
 }
 
-fn readerr(e: nix_editor_fresh::read::ReadError, file: &str, attr: &str) {
+pub fn readerr(e: nix_editor_fresh::read::ReadError, file: &str, attr: &str) {
     let msg;
     match e {
         nix_editor_fresh::read::ReadError::ParseError => {
@@ -125,12 +125,12 @@ fn readerr(e: nix_editor_fresh::read::ReadError, file: &str, attr: &str) {
     }
 }
 
-fn nofileerr(file: &str) {
+pub fn nofileerr(file: &str) {
     let msg = format!("reading '{}': {}", file.purple(), "No such file".purple());
     printerror(&msg);
 }
 
-fn printerror(msg: &str) {
+pub fn printerror(msg: &str) {
     println!("{} {}", "error:".red(), msg);
 }
 
