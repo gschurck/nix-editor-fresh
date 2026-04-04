@@ -2,6 +2,7 @@ use clap::{self, ArgGroup, Parser};
 use nix_editor::{write::addtoarr, write::deref, write::write};
 use owo_colors::*;
 use std::{fs, io::Write};
+use nix_editor::write::rmarr;
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
@@ -10,14 +11,14 @@ struct Args {
     /// Configuration file to read
     file: String,
 
-    /// Nix configuration option arribute
+    /// Nix configuration option attribute
     attribute: String,
 
     /// Value to write
     #[arg(short, long)]
     val: Option<String>,
 
-    /// Element to add
+    /// Element to add or remove
     #[arg(short, long)]
     arr: Option<String>,
 
@@ -144,7 +145,15 @@ fn main() {
             std::process::exit(1);
         }
     };
-    if args.arr.is_some() {
+    if args.arr.is_some() && args.deref {
+        output = match rmarr(&f, &args.attribute, vec![args.arr.unwrap()]) {
+            Ok(x) => x,
+            Err(e) => {
+                writeerr(e, &args.file, &args.attribute);
+                std::process::exit(1)
+            }
+        };
+    } else if args.arr.is_some() {
         output = match addtoarr(&f, &args.attribute, vec![args.arr.unwrap()]) {
             Ok(x) => x,
             Err(e) => {
